@@ -1,0 +1,27 @@
+﻿<Window x:Class="KinderMediaPlayer.WndMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KinderMediaPlayer"
+        mc:Ignorable="d"
+        Title="Kinder Media Player" Height="600" Width="800"  
+        WindowStyle="None" WindowState="Maximized">
+    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+        <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Stretch" Margin="50">
+            <Label>Kinder Media Player</Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </StackPanel>        
+        <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="5" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
+    </DockPanel>
+
+
+</Window>
