@@ -1,4 +1,9 @@
 # KinderMediaPlayer
+
+```diff
+- NOTE: KinderMediaPlayer is still early in development and not yet ready for use
+```
+
 KinderMediaPlayer is a simple Kiosk-like application that allows children to view and listen to predefined media content (Videos, Images and Audio).
 
 ### Features
