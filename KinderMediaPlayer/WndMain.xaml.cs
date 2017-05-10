@@ -34,11 +34,37 @@ namespace KinderMediaPlayer
             ServiceSettings.loadSettings();
 
             InitializeComponent();
+
+            refreshApp();
         }
 
+        #region MEDIA_ELEMENTS
+        
+        private void populateElements()
+        {
+            // Mainly called from refreshApp()
+            if (ServiceSettings.getMediaElements() == null)
+            {
+                return;
+            }
+
+            pnlElements.Children.Clear();
+
+            foreach (MediaElement currentElement in ServiceSettings.getMediaElements())
+            {
+                pnlElements.Children.Add(new UCMediaElement(currentElement, openMediaElement));
+            }
+        }
+
+        private void openMediaElement(MediaElement inElement)
+        {
+            MessageBox.Show("Test");
+        }
+        
+        #endregion MEDIA_ELEMENTS
 
         #region ADMINISTRATION
-        
+
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
             dlgPassword cDlg = new dlgPassword();
@@ -65,6 +91,29 @@ namespace KinderMediaPlayer
             }
 
             ServiceWinInterop.enableHook();
+
+            refreshApp();
+        }
+
+
+        private void refreshApp()
+        {
+            // Re-Applies any changes made to the App in general
+            // Like the background:
+            if (!string.IsNullOrEmpty(ServiceSettings.getBackgroundSource()))
+            {
+                try
+                {
+                    this.Background = new ImageBrush(new BitmapImage(new Uri(ServiceSettings.getBackgroundSource(), UriKind.Relative)));
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Could not open the Background image. Using white instead.", "Error", MessageBoxButton.OK);
+                }
+            }
+
+            // And all the individual Media Elements:
+            populateElements();
         }
 
         #endregion ADMINISTRATION

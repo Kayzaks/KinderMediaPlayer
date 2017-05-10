@@ -10,15 +10,7 @@
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
         <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Stretch" Margin="50">
             <Label>Kinder Media Player</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-            </Grid>
+            <WrapPanel x:Name="pnlElements" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></WrapPanel>
         </StackPanel>        
         <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="5" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
     </DockPanel>

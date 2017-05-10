@@ -21,7 +21,17 @@ namespace KinderMediaPlayer
             get; set;
         }
 
+        public string Description
+        {
+            get; set;
+        }
+
         public string Source
+        {
+            get; set;
+        }
+
+        public string Icon
         {
             get; set;
         }
@@ -40,9 +50,17 @@ namespace KinderMediaPlayer
                 {
                     Name = inNode.Attributes["NAME"].Value;
                 }
+                if (inNode.Attributes["DESCRIPTION"] != null)
+                {
+                    Description = inNode.Attributes["DESCRIPTION"].Value;
+                }
                 if (inNode.Attributes["SOURCE"] != null)
                 {
                     Source = inNode.Attributes["SOURCE"].Value;
+                }
+                if (inNode.Attributes["ICON"] != null)
+                {
+                    Icon = inNode.Attributes["ICON"].Value;
                 }
                 if (inNode.Attributes["TYPE"] != null)
                 {
@@ -73,8 +91,16 @@ namespace KinderMediaPlayer
             attr.Value = Name;
             thisNode.Attributes.Append(attr);
 
+            attr = inDoc.CreateAttribute("DESCRIPTION");
+            attr.Value = Description;
+            thisNode.Attributes.Append(attr);
+
             attr = inDoc.CreateAttribute("SOURCE");
             attr.Value = Source;
+            thisNode.Attributes.Append(attr);
+
+            attr = inDoc.CreateAttribute("ICON");
+            attr.Value = Icon;
             thisNode.Attributes.Append(attr);
 
             attr = inDoc.CreateAttribute("TYPE");

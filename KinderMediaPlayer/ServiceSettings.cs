@@ -10,11 +10,16 @@ namespace KinderMediaPlayer
 {
     public class ServiceSettings
     {
+        // This password will be overwritten by the value in settings.xml (if it exists)
         private readonly static string STANDARD_PASSWORD = "admin";
         private readonly static string SETTINGS_FILE_NAME = "settings.xml";
 
+        // Password is saved as a SHA256 hash
         private static string currentPassword = null;
+        private static string backgroundSource = null;
         private static List<MediaElement> mediaElements;
+
+        #region LOAD_SAVE_SETTINGS
 
         public static void loadSettings()
         {
@@ -35,6 +40,14 @@ namespace KinderMediaPlayer
                     if (string.Equals(currentNode.Name, "MEDIAELEMENT"))
                     {
                         mediaElements.Add(new MediaElement(currentNode));
+                    }
+
+                    if (string.Equals(currentNode.Name, "BACKGROUND"))
+                    {
+                        if (currentNode.Attributes["SOURCE"] != null)
+                        {
+                            backgroundSource = currentNode.Attributes["SOURCE"].Value;
+                        }
                     }
                 }
             }
@@ -57,14 +70,22 @@ namespace KinderMediaPlayer
             // before this.
 
             XmlDocument xmlDoc = new XmlDocument();
+            XmlAttribute attr;
             XmlNode rootNode = xmlDoc.CreateElement("SETTINGS");
             xmlDoc.AppendChild(rootNode);
 
             XmlNode passwordNode = xmlDoc.CreateElement("PASSWORD");
             passwordNode.InnerText = currentPassword;
             rootNode.AppendChild(passwordNode);
-
-            foreach(MediaElement currentElement in mediaElements)
+            
+            XmlNode backgroundNode = xmlDoc.CreateElement("BACKGROUND");
+            attr = xmlDoc.CreateAttribute("SOURCE");
+            attr.Value = backgroundSource;
+            backgroundNode.Attributes.Append(attr);
+            rootNode.AppendChild(backgroundNode);
+          
+            // And save all the individual Media Elements
+            foreach (MediaElement currentElement in mediaElements)
             {
                 XmlNode mediaNode = currentElement.addToXML(xmlDoc);
                 if (mediaNode != null)
@@ -76,6 +97,21 @@ namespace KinderMediaPlayer
             xmlDoc.Save(SETTINGS_FILE_NAME);
         }
 
+        #endregion LOAD_SAVE_SETTINGS
+
+        #region MEDIA
+
+        public static List<MediaElement> getMediaElements()
+        {
+            return mediaElements;
+        }
+
+        public static string getBackgroundSource()
+        {
+            return backgroundSource;
+        }
+
+        #endregion MEDIA
 
         #region PASSWORD
 
