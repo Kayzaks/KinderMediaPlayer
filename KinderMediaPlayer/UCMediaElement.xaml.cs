@@ -20,81 +20,53 @@ namespace KinderMediaPlayer
     /// </summary>
     public partial class UCMediaElement : UserControl
     {
-        private MediaElement mediaElement;
-        private Action<MediaElement> callbackOpen;
+        #region VIEWMODEL_INLINE
+
+        class UCMediaElementViewModel : Notifier
+        {
+            private MediaElement referenceElement;
+
+            public MediaElement ReferenceElement
+            {
+                get
+                {
+                    return referenceElement;
+                }
+                set
+                {
+                    SetField(ref referenceElement, value);
+                }
+            }
+
+            public Action<MediaElement> CallbackOpen
+            {
+                get; set;
+            }
+        }
+
+        #endregion VIEWMODEL_INLINE
+        
+
+        private UCMediaElementViewModel dataContext;
         
         public UCMediaElement()
         {
             InitializeComponent();
 
-            mediaElement = null;
+            dataContext = new UCMediaElementViewModel();
+            this.DataContext = dataContext;
         }
 
         public UCMediaElement(MediaElement inElement, Action<MediaElement> inCallback) : this()
         {            
-            setMediaElement(inElement);
-
-            callbackOpen = inCallback;
+            dataContext.CallbackOpen = inCallback;
+            dataContext.ReferenceElement = inElement;
         }
 
-        public void setMediaElement(MediaElement inElement)
-        {
-            if (inElement == null)
-            {
-                return;
-            }
-
-            mediaElement = inElement;
-
-            lblName.Content = mediaElement.Name;
-            lblDescription.Content = mediaElement.Description;
-            
-
-            if (!string.IsNullOrEmpty(mediaElement.Icon))
-            {
-                try
-                {
-                    // TODO: Create an Image inside Content and set the URI from that
-                    //BitmapImage iconImage = new BitmapImage(new Uri(mediaElement.Icon, UriKind.Relative));
-                    //Image iconControl = new Image();
-                    //iconControl.Source = iconImage;
-
-                    //StackPanel iconStack = new StackPanel();
-                    //iconStack.Orientation = Orientation.Horizontal;
-                    //iconStack.Margin = new Thickness(0);
-                    //iconStack.Children.Add(iconControl);
-
-                    //btnOpen.Content = iconImage;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Could not open the Background image. Using white instead.", "Error", MessageBoxButton.OK);
-                }
-            }          
-
-
-            switch (mediaElement.Type)
-            {
-                case MediaElement.MEDIA_TYPE.IMAGE:
-
-                    break;
-
-                case MediaElement.MEDIA_TYPE.SOUND:
-
-                    break;
-
-                case MediaElement.MEDIA_TYPE.VIDEO:
-
-                    break;
-            }
-        }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            if (callbackOpen != null)
-            {
-                callbackOpen(mediaElement);
-            }
+            dataContext.CallbackOpen?.Invoke(dataContext.ReferenceElement);
         }
     }
 }

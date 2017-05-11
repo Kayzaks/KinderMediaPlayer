@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KinderMediaPlayer"
         mc:Ignorable="d"
-        Title="Admin Panel" Height="338.144" Width="602.062">
+        Title="Admin Panel" Width="602.062"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label Style="{StaticResource AdminHeader1}">Admin Panel</Label>

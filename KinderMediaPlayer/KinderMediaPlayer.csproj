@@ -55,17 +55,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="dlgPassword.xaml.cs">
-      <DependentUpon>dlgPassword.xaml</DependentUpon>
+    <Compile Include="ConvMediaElementToIcon.cs" />
+    <Compile Include="DlgPassword.xaml.cs">
+      <DependentUpon>DlgPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IMediaPlayer.cs" />
     <Compile Include="MediaElement.cs" />
+    <Compile Include="Notifier.cs" />
     <Compile Include="ServiceSettings.cs" />
     <Compile Include="ServiceWinInterop.cs" />
-    <Page Include="dlgPassword.xaml">
+    <Page Include="DlgPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UCBlackOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UCMediaElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UCPlayerAudio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UCPlayerImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UCPlayerVideo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,8 +100,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UCBlackOut.xaml.cs">
+      <DependentUpon>UCBlackOut.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UCMediaElement.xaml.cs">
       <DependentUpon>UCMediaElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCPlayerAudio.xaml.cs">
+      <DependentUpon>UCPlayerAudio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCPlayerImage.xaml.cs">
+      <DependentUpon>UCPlayerImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCPlayerVideo.xaml.cs">
+      <DependentUpon>UCPlayerVideo.xaml</DependentUpon>
     </Compile>
     <Compile Include="WndAdmin.xaml.cs">
       <DependentUpon>WndAdmin.xaml</DependentUpon>
@@ -118,6 +149,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\IconReference.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\IconLicense.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\audio.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\video.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\unknown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

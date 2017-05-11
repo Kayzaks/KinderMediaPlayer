@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace KinderMediaPlayer
 {
-    public class ServiceSettings
+    public static class ServiceSettings
     {
         // This password will be overwritten by the value in settings.xml (if it exists)
         private readonly static string STANDARD_PASSWORD = "admin";

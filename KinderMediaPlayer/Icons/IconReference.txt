@@ -1,0 +1,6 @@
+﻿Icons by Nick Roach (http://www.elegantthemes.com/)
+
+Found at https://www.elegantthemes.com/blog/freebie-of-the-week/beautiful-flat-icons-for-free
+
+
+These are referenced in the ConvMediaElementToIcon class

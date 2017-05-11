@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace KinderMediaPlayer
 {
-    public class ServiceWinInterop
+    public static class ServiceWinInterop
     {
         // The following code was modified for this project from: http://geekswithblogs.net/aghausman/archive/2009/04/26/disable-special-keys-in-win-app-c.aspx
 

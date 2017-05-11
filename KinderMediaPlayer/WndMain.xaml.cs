@@ -32,7 +32,7 @@ namespace KinderMediaPlayer
 
             // Load the Settings from settings.xml
             ServiceSettings.loadSettings();
-
+            
             InitializeComponent();
 
             refreshApp();
@@ -58,7 +58,41 @@ namespace KinderMediaPlayer
 
         private void openMediaElement(MediaElement inElement)
         {
-            MessageBox.Show("Test");
+            switch(inElement.Type)
+            {
+                case MediaElement.MEDIA_TYPE.IMAGE:
+
+                    playPlayer(playerImage, inElement.Source);
+                    break;
+
+                case MediaElement.MEDIA_TYPE.SOUND:
+
+                    playPlayer(playerAudio, inElement.Source);
+                    break;
+
+                case MediaElement.MEDIA_TYPE.VIDEO:
+
+                    playPlayer(playerVideo, inElement.Source);
+                    break;
+
+                default:
+
+                    playPlayer(null, null);
+                    break;
+            }
+        }
+
+        private void playPlayer(UserControl inElement, string inSource)
+        {
+            playerAudio.Visibility = Visibility.Collapsed;
+            playerImage.Visibility = Visibility.Collapsed;
+            playerVideo.Visibility = Visibility.Collapsed;
+
+            if (inElement != null && inElement is IMediaPlayer && string.IsNullOrEmpty(inSource) == false)
+            {
+                inElement.Visibility = Visibility.Visible;
+                (inElement as IMediaPlayer).playMedia(inSource);
+            }
         }
         
         #endregion MEDIA_ELEMENTS
@@ -67,7 +101,7 @@ namespace KinderMediaPlayer
 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            dlgPassword cDlg = new dlgPassword();
+            DlgPassword cDlg = new DlgPassword();
 
             // We temporarily allow Keyboard input.
             //
@@ -79,15 +113,18 @@ namespace KinderMediaPlayer
 
             ServiceWinInterop.disableHook();
 
-            if (cDlg.ShowDialog() == true && ServiceSettings.checkPassword(cDlg.resultPassword) == true)
+            if (cDlg.ShowDialog() == true)
             {
-                // A correct password was entered!
-                WndAdmin cAdmin = new WndAdmin();
-                cAdmin.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Wrong Password", "Password", MessageBoxButton.OK);
+                if (ServiceSettings.checkPassword(cDlg.resultPassword) == true)
+                {
+                    // A correct password was entered!
+                    WndAdmin cAdmin = new WndAdmin();
+                    cAdmin.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Wrong Password", "Password", MessageBoxButton.OK);
+                }
             }
 
             ServiceWinInterop.enableHook();
@@ -109,6 +146,7 @@ namespace KinderMediaPlayer
                 catch(Exception e)
                 {
                     MessageBox.Show("Could not open the Background image. Using white instead.", "Error", MessageBoxButton.OK);
+                    this.Background = new SolidColorBrush(Colors.White);
                 }
             }
 

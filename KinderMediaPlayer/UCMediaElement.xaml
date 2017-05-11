@@ -7,6 +7,10 @@
              HorizontalContentAlignment="Stretch"
              HorizontalAlignment="Stretch"
              mc:Ignorable="d" Height="80" Width="auto">
+    <UserControl.Resources>
+        <local:ConvMediaElementToIcon x:Key="convMediaElementToIcon"/>
+    </UserControl.Resources>
+    
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,9 +22,11 @@
         </Grid.ColumnDefinitions>
 
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Fill="Gray" Opacity="0.4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
-        
-        <Button x:Name="btnOpen" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Click="btnOpen_Click">T</Button>
-        <Label x:Name="lblName" Margin="5" Grid.Column="1" Grid.Row="0">TEST</Label>
-        <Label x:Name="lblDescription" Margin="5" Grid.Column="1" Grid.Row="1">TEST</Label>
+
+        <Button x:Name="btnOpen" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Click="btnOpen_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Image Source="{Binding ReferenceElement, Converter={StaticResource convMediaElementToIcon}}"></Image>
+        </Button>
+        <Label Margin="5" Grid.Column="1" Grid.Row="0" Content="{Binding ReferenceElement.Name}"/>
+        <Label Margin="5" Grid.Column="1" Grid.Row="1" Content="{Binding ReferenceElement.Description}"/>
     </Grid>
 </UserControl>

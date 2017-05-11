@@ -43,34 +43,43 @@ namespace KinderMediaPlayer
 
         public MediaElement(XmlNode inNode)
         {
+            loadFromXML(inNode);
+        }
+
+        #region XML
+
+        public void loadFromXML(XmlNode inNode)
+        {
             // Load from an XML Node
-            if (inNode != null)
+            if (inNode == null)
             {
-                if (inNode.Attributes["NAME"] != null)
+                return;
+            }
+
+            if (inNode.Attributes["NAME"] != null)
+            {
+                Name = inNode.Attributes["NAME"].Value;
+            }
+            if (inNode.Attributes["DESCRIPTION"] != null)
+            {
+                Description = inNode.Attributes["DESCRIPTION"].Value;
+            }
+            if (inNode.Attributes["SOURCE"] != null)
+            {
+                Source = inNode.Attributes["SOURCE"].Value;
+            }
+            if (inNode.Attributes["ICON"] != null)
+            {
+                Icon = inNode.Attributes["ICON"].Value;
+            }
+            if (inNode.Attributes["TYPE"] != null)
+            {
+                int newType = (int)MEDIA_TYPE.IMAGE;
+                if (Int32.TryParse(inNode.Attributes["TYPE"].Value, out newType) == true)
                 {
-                    Name = inNode.Attributes["NAME"].Value;
-                }
-                if (inNode.Attributes["DESCRIPTION"] != null)
-                {
-                    Description = inNode.Attributes["DESCRIPTION"].Value;
-                }
-                if (inNode.Attributes["SOURCE"] != null)
-                {
-                    Source = inNode.Attributes["SOURCE"].Value;
-                }
-                if (inNode.Attributes["ICON"] != null)
-                {
-                    Icon = inNode.Attributes["ICON"].Value;
-                }
-                if (inNode.Attributes["TYPE"] != null)
-                {
-                    int newType = (int)MEDIA_TYPE.IMAGE;
-                    if (Int32.TryParse(inNode.Attributes["TYPE"].Value, out newType) == true)
+                    if (Enum.IsDefined(typeof(MEDIA_TYPE), newType))
                     {
-                        if (Enum.IsDefined(typeof(MEDIA_TYPE), newType))
-                        {
-                            Type = (MEDIA_TYPE) newType;
-                        }
+                        Type = (MEDIA_TYPE)newType;
                     }
                 }
             }
@@ -79,7 +88,7 @@ namespace KinderMediaPlayer
         public XmlNode addToXML(XmlDocument inDoc)
         {
             // Save to an XML Node
-            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Source))
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Source) || inDoc == null)
             {
                 return null;
             }
@@ -109,5 +118,7 @@ namespace KinderMediaPlayer
 
             return thisNode;
         }
+
+        #endregion XML
     }
 }

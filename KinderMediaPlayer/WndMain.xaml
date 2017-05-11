@@ -7,13 +7,28 @@
         mc:Ignorable="d"
         Title="Kinder Media Player" Height="600" Width="800"  
         WindowStyle="None" WindowState="Maximized">
-    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
-        <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Stretch" Margin="50">
-            <Label>Kinder Media Player</Label>
-            <WrapPanel x:Name="pnlElements" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></WrapPanel>
-        </StackPanel>        
-        <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="5" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
-    </DockPanel>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Width="Auto">
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Stretch" Margin="50">
+                <!--<Label>Kinder Media Player</Label>-->
+                <WrapPanel x:Name="pnlElements" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <WrapPanel.Resources>
+                        <Style TargetType="{x:Type local:UCMediaElement}">
+                            <Setter Property="Margin" Value="10" />
+                        </Style>
+                    </WrapPanel.Resources>
+                </WrapPanel>
+            </StackPanel>
+            <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="5" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
+
+        </DockPanel>
+
+        <local:UCPlayerImage x:Name="playerImage" Visibility="Collapsed"></local:UCPlayerImage>
+        <local:UCPlayerAudio x:Name="playerAudio" Visibility="Collapsed"></local:UCPlayerAudio>
+        <local:UCPlayerVideo x:Name="playerVideo" Visibility="Collapsed"></local:UCPlayerVideo>
+        
+    </Grid>
+    
 
 
 </Window>

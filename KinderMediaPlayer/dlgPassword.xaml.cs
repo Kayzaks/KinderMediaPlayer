@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 namespace KinderMediaPlayer
 {
     /// <summary>
-    /// Interaktionslogik für dlgPassword.xaml
+    /// Interaktionslogik für DlgPassword.xaml
     /// </summary>
-    public partial class dlgPassword : Window
+    public partial class DlgPassword : Window
     {
         public string resultPassword = null;
 
-        public dlgPassword()
+        public DlgPassword()
         {
             InitializeComponent();
         }
@@ -30,6 +30,15 @@ namespace KinderMediaPlayer
         {
             resultPassword = txtPassword.Password;
             DialogResult = true;
+        }
+
+        private void txtPassword_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                btnOk_Click(sender, e);
+                e.Handled = true;
+            }
         }
     }
 }
