@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KinderMediaPlayer"
         mc:Ignorable="d"
         Title="Kinder Media Player" Height="600" Width="800"  
-        WindowStyle="None" WindowState="Maximized">
+        WindowStyle="None" ResizeMode="NoResize"  WindowState="Maximized">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Width="Auto">
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Stretch" Margin="50">
@@ -19,7 +19,7 @@
                     </WrapPanel.Resources>
                 </WrapPanel>
             </StackPanel>
-            <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="5" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
+            <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="50" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
 
         </DockPanel>
 

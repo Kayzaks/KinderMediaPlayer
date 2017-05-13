@@ -10,6 +10,7 @@ namespace KinderMediaPlayer
 {
     public static class ServiceWinInterop
     {
+        #region KEY_CAPTURE
         // The following code was modified for this project from: http://geekswithblogs.net/aghausman/archive/2009/04/26/disable-special-keys-in-win-app-c.aspx
 
         [StructLayout(LayoutKind.Sequential)]
@@ -67,5 +68,41 @@ namespace KinderMediaPlayer
             }
             return CallNextHookEx(ptrHook, nCode, wp, lp);
         }
+
+        #endregion KEY_CAPTURE
+
+
+        #region OPEN_FILE_DIALOG
+
+        public static string openDialogImageFile()
+        {
+            Microsoft.Win32.OpenFileDialog dlgOpen = new Microsoft.Win32.OpenFileDialog();
+            
+            dlgOpen.Filter = "Image Files|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|Any File|*.*";
+                                    
+            if (dlgOpen.ShowDialog() == true)
+            {
+                return dlgOpen.FileName;
+            }
+
+            return null;
+        }
+
+        public static string openDialogSourceFile()
+        {
+            Microsoft.Win32.OpenFileDialog dlgOpen = new Microsoft.Win32.OpenFileDialog();
+
+            dlgOpen.Filter = "Any File|*.*";
+
+            if (dlgOpen.ShowDialog() == true)
+            {
+                return dlgOpen.FileName;
+            }
+
+            return null;
+        }
+
+        #endregion OPEN_FILE_DIALOG
+
     }
 }

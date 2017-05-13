@@ -9,16 +9,48 @@ namespace KinderMediaPlayer
 {
     public class MediaElement
     {
+        #region MEDIA_TYPES
+
+        // NOTE: This Enum and the following string list have to have the same ordering
+        //       and indices.
         public enum MEDIA_TYPE : int
         {
-            IMAGE = 1,
-            SOUND = 2,
-            VIDEO = 3,
+            IMAGE = 0,
+            SOUND = 1,
+            VIDEO = 2,
         }
+        public static List<string> MEDIA_TYPE_STRING = new List<string>()
+        {
+            "Image",
+            "Audio",
+            "Video"
+        };
+
+        public static bool isMediaType(int inInt)
+        {
+            return Enum.IsDefined(typeof(MEDIA_TYPE), inInt);
+        }
+
+        #endregion MEDIA_TYPES
 
         public string Name
         {
             get; set;
+        }
+
+        public string LongName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Name))
+                {
+                    return "[" + TypeName + "]";
+                }
+                else
+                {
+                    return Name + " - [" + TypeName + "]";
+                }
+            }
         }
 
         public string Description
@@ -41,10 +73,39 @@ namespace KinderMediaPlayer
             get; set;
         }
 
-        public MediaElement(XmlNode inNode)
+        public string TypeName
+        {
+            get
+            {
+                return MEDIA_TYPE_STRING[(int)Type];
+            }
+        }
+
+        public MediaElement()
+        {
+            Name = "";
+            Description = "";
+            Source = null;
+            Icon = null;
+            Type = MEDIA_TYPE.IMAGE;
+        }
+
+        public MediaElement(MediaElement inElement)
+        {
+            // Copy the Element
+            Name = inElement.Name;
+            Description = inElement.Description;
+            Source = inElement.Source;
+            Icon = inElement.Icon;
+            Type = inElement.Type;
+        }
+
+        public MediaElement(XmlNode inNode) : this()
         {
             loadFromXML(inNode);
         }
+
+
 
         #region XML
 
@@ -77,7 +138,7 @@ namespace KinderMediaPlayer
                 int newType = (int)MEDIA_TYPE.IMAGE;
                 if (Int32.TryParse(inNode.Attributes["TYPE"].Value, out newType) == true)
                 {
-                    if (Enum.IsDefined(typeof(MEDIA_TYPE), newType))
+                    if (isMediaType(newType))
                     {
                         Type = (MEDIA_TYPE)newType;
                     }

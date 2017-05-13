@@ -8,11 +8,71 @@
         Title="Admin Panel" Width="602.062"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:ConvMediaElementToIcon x:Key="convMediaElementToIcon"/>
+    </Window.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label Style="{StaticResource AdminHeader1}">Admin Panel</Label>
+
+            <Separator/>
+            <Label Style="{StaticResource AdminHeader2}">Background Image</Label>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">Select Image</Label>
+                <Button Grid.Row="1" Grid.Column="0" Click="btnOpenBackground_Click" Margin="5">Open File...</Button>
+                <Label x:Name="lblBackgroundFile" Grid.Column="1" Grid.Row="1" Style="{StaticResource DataField}" Content="{Binding BackgroundImage}" />
+            </Grid>
+            
             <Separator/>
             
+            <Label Style="{StaticResource AdminHeader2}">Media Elements</Label>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <ListBox x:Name="lstMediaElements" ItemsSource="{Binding MediaElements, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedElement, Mode=TwoWay}" Height="200" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LongName}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Label Grid.Row="0" Grid.Column="1">Description:</Label>
+                <Label Grid.Row="1" Grid.Column="1">Icon:</Label>
+                <Label Grid.Row="2" Grid.Column="1">Type:</Label>
+                <Label Grid.Row="3" Grid.Column="1">Source:</Label>
+
+                <Label Grid.Row="0" Grid.Column="2"  Style="{StaticResource DataField}" Content="{Binding SelectedElement.Description}"/>
+                <Image Grid.Row="1" Grid.Column="2"  Source="{Binding SelectedElement, Converter={StaticResource convMediaElementToIcon}}" Height="100" Width="100" Stretch="Fill"/>
+                <Label Grid.Row="2" Grid.Column="2"  Style="{StaticResource DataField}" Content="{Binding SelectedElement.TypeName}"/>
+                <Label Grid.Row="3" Grid.Column="2"  Style="{StaticResource DataField}" Content="{Binding SelectedElement.Source}"/>
+
+                <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Click="btnAddElement_Click" Margin="5">Add Element</Button>
+                    <Button Click="btnRemoveElement_Click" Margin="5">Remove Element</Button>
+                </StackPanel>
+            </Grid>
             <Separator/>
             <Label Style="{StaticResource AdminHeader2}">Change Password</Label>
             <Grid Margin="20">
@@ -35,9 +95,9 @@
             <Separator/>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnSave" Click="btnSave_Click" Margin="5">Save</Button>
-                <Button x:Name="btnCancel" Click="btnCancel_Click" Margin="5">Cancel</Button>
-                <Button x:Name="btnClose" Click="btnClose_Click" Margin="50,5,5,5">Exit Media Player</Button>
+                <Button Click="btnSave_Click" Margin="5">Save</Button>
+                <Button Click="btnCancel_Click" Margin="5">Cancel</Button>
+                <Button Click="btnClose_Click" Margin="50,5,5,5">Exit Media Player</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

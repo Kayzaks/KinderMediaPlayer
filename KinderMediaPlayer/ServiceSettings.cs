@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -104,6 +105,24 @@ namespace KinderMediaPlayer
         public static List<MediaElement> getMediaElements()
         {
             return mediaElements;
+        }
+
+        public static ObservableCollection<MediaElement> getCopyMediaElements()
+        {
+            if (mediaElements == null)
+            {
+                return new ObservableCollection<MediaElement>();
+            }
+
+            return new ObservableCollection<MediaElement>(mediaElements.Select(x => new MediaElement(x)));
+        }
+
+        public static void setMediaElements(List<MediaElement> inElements)
+        {
+            if (inElements != null)
+            {
+                mediaElements = inElements;
+            }
         }
 
         public static string getBackgroundSource()

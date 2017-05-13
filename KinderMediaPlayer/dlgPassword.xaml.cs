@@ -34,6 +34,7 @@ namespace KinderMediaPlayer
 
         private void txtPassword_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            // Instead of clicking, the user can hit enter to continue
             if (e.Key == Key.Enter)
             {
                 btnOk_Click(sender, e);
