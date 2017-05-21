@@ -9,16 +9,9 @@
         WindowStyle="None" ResizeMode="NoResize"  WindowState="Maximized">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Width="Auto">
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
-            <StackPanel DockPanel.Dock="Top" Orientation="Vertical" VerticalAlignment="Stretch" Margin="50">
                 <!--<Label>Kinder Media Player</Label>-->
-                <WrapPanel x:Name="pnlElements" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <WrapPanel.Resources>
-                        <Style TargetType="{x:Type local:UCMediaElement}">
-                            <Setter Property="Margin" Value="10" />
-                        </Style>
-                    </WrapPanel.Resources>
-                </WrapPanel>
-            </StackPanel>
+                <local:UCMediaGrid DockPanel.Dock="Top" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnStartMediaElement="UCMediaGrid_OnStartMediaElement" MediaList="{Binding MediaElements, UpdateSourceTrigger=PropertyChanged}"></local:UCMediaGrid>
+
             <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="50" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
 
         </DockPanel>

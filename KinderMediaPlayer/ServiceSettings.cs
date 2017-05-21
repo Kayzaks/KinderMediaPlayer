@@ -18,13 +18,13 @@ namespace KinderMediaPlayer
         // Password is saved as a SHA256 hash
         private static string currentPassword = null;
         private static string backgroundSource = null;
-        private static List<MediaElement> mediaElements;
+        private static ObservableCollection<MediaElement> mediaElements;
 
         #region LOAD_SAVE_SETTINGS
 
         public static void loadSettings()
         {
-            mediaElements = new List<MediaElement>();
+            mediaElements = new ObservableCollection<MediaElement>();
 
             try
             {
@@ -102,7 +102,7 @@ namespace KinderMediaPlayer
 
         #region MEDIA
 
-        public static List<MediaElement> getMediaElements()
+        public static ObservableCollection<MediaElement> getMediaElements()
         {
             return mediaElements;
         }
@@ -117,7 +117,7 @@ namespace KinderMediaPlayer
             return new ObservableCollection<MediaElement>(mediaElements.Select(x => new MediaElement(x)));
         }
 
-        public static void setMediaElements(List<MediaElement> inElements)
+        public static void setMediaElements(ObservableCollection<MediaElement> inElements)
         {
             if (inElements != null)
             {

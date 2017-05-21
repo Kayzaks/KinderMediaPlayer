@@ -122,7 +122,7 @@ namespace KinderMediaPlayer
 
             if (dataContext.MediaElements != null)
             {
-                ServiceSettings.setMediaElements(new List<MediaElement>(dataContext.MediaElements));
+                ServiceSettings.setMediaElements(new ObservableCollection<MediaElement>(dataContext.MediaElements));
             }
 
             // And save

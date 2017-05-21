@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,32 @@ namespace KinderMediaPlayer
     /// </summary>
     public partial class WndMain : Window
     {
+        #region VIEWMODEL_INLINE
+
+        class WndMainViewModel : Notifier
+        {
+            private ObservableCollection<MediaElement> mediaElements;
+            public ObservableCollection<MediaElement> MediaElements
+            {
+                get
+                {
+                    if (mediaElements == null)
+                    {
+                        mediaElements = ServiceSettings.getMediaElements();
+                    }
+                    return mediaElements;
+                }
+                set
+                {
+                    SetField(ref mediaElements, value);
+                }
+            }
+        }
+
+        #endregion VIEWMODEL_INLINE
+
+        private WndMainViewModel dataContext;
+
         public WndMain()
         {
             // Disable all special keys to prevent the Window from being closed / hidden. 
@@ -35,50 +62,41 @@ namespace KinderMediaPlayer
             
             InitializeComponent();
 
+            dataContext = new WndMainViewModel();
+            this.DataContext = dataContext;
+
             refreshApp();
         }
 
         #region MEDIA_ELEMENTS
-        
-        private void populateElements()
+
+        private void UCMediaGrid_OnStartMediaElement(object sender, EventArgs e)
         {
-            // Mainly called from refreshApp()
-            if (ServiceSettings.getMediaElements() == null)
+            if (sender != null && sender is MediaElement)
             {
-                return;
-            }
+                MediaElement inElement = (MediaElement)sender;
+                switch (inElement.Type)
+                {
+                    case MediaElement.MEDIA_TYPE.IMAGE:
 
-            pnlElements.Children.Clear();
+                        playPlayer(playerImage, inElement.Source);
+                        break;
 
-            foreach (MediaElement currentElement in ServiceSettings.getMediaElements())
-            {
-                pnlElements.Children.Add(new UCMediaElement(currentElement, openMediaElement));
-            }
-        }
+                    case MediaElement.MEDIA_TYPE.SOUND:
 
-        private void openMediaElement(MediaElement inElement)
-        {
-            switch(inElement.Type)
-            {
-                case MediaElement.MEDIA_TYPE.IMAGE:
+                        playPlayer(playerAudio, inElement.Source);
+                        break;
 
-                    playPlayer(playerImage, inElement.Source);
-                    break;
+                    case MediaElement.MEDIA_TYPE.VIDEO:
 
-                case MediaElement.MEDIA_TYPE.SOUND:
+                        playPlayer(playerVideo, inElement.Source);
+                        break;
 
-                    playPlayer(playerAudio, inElement.Source);
-                    break;
+                    default:
 
-                case MediaElement.MEDIA_TYPE.VIDEO:
-
-                    playPlayer(playerVideo, inElement.Source);
-                    break;
-
-                default:
-
-                    playPlayer(null, null);
-                    break;
+                        playPlayer(null, null);
+                        break;
+                }
             }
         }
 
@@ -94,7 +112,7 @@ namespace KinderMediaPlayer
                 (inElement as IMediaPlayer).playMedia(inSource);
             }
         }
-        
+
         #endregion MEDIA_ELEMENTS
 
         #region ADMINISTRATION
@@ -151,7 +169,7 @@ namespace KinderMediaPlayer
             }
 
             // And all the individual Media Elements:
-            populateElements();
+            dataContext.MediaElements = ServiceSettings.getMediaElements();
         }
 
         #endregion ADMINISTRATION

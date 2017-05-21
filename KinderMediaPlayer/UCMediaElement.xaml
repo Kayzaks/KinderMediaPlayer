@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:KinderMediaPlayer"
              HorizontalContentAlignment="Stretch"
              HorizontalAlignment="Stretch"
-             mc:Ignorable="d" Height="80" Width="auto">
+             mc:Ignorable="d" Height="auto" Width="auto"
+             Margin="10">
     <UserControl.Resources>
         <local:ConvMediaElementToIcon x:Key="convMediaElementToIcon"/>
     </UserControl.Resources>
@@ -17,7 +18,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 

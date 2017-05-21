@@ -117,6 +117,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UCMediaGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UCPlayerAudio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +150,9 @@
     </Compile>
     <Compile Include="UCMediaElement.xaml.cs">
       <DependentUpon>UCMediaElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UCMediaGrid.xaml.cs">
+      <DependentUpon>UCMediaGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="UCPlayerAudio.xaml.cs">
       <DependentUpon>UCPlayerAudio.xaml</DependentUpon>
