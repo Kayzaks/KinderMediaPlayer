@@ -8,13 +8,9 @@
         Title="Kinder Media Player" Height="600" Width="800"  
         WindowStyle="None" ResizeMode="NoResize"  WindowState="Maximized">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" Width="Auto">
-        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
-                <!--<Label>Kinder Media Player</Label>-->
-                <local:UCMediaGrid DockPanel.Dock="Top" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnStartMediaElement="UCMediaGrid_OnStartMediaElement" MediaList="{Binding MediaElements, UpdateSourceTrigger=PropertyChanged}"></local:UCMediaGrid>
+        <local:UCMediaGrid Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnStartMediaElement="UCMediaGrid_OnStartMediaElement" MediaList="{Binding MediaElements, UpdateSourceTrigger=PropertyChanged}"></local:UCMediaGrid>
 
-            <Button x:Name="btnAdmin" DockPanel.Dock="Bottom" Margin="50" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
-
-        </DockPanel>
+        <Button x:Name="btnAdmin" Margin="20" Click="btnAdmin_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom">Admin</Button>
 
         <local:UCPlayerImage x:Name="playerImage" Visibility="Collapsed"></local:UCPlayerImage>
         <local:UCPlayerAudio x:Name="playerAudio" Visibility="Collapsed"></local:UCPlayerAudio>

@@ -9,6 +9,8 @@
              Width="auto" Height="auto"
              PreviewMouseUp="UCPlayerAudio_PreviewMouseUp">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <local:UCBlackOut></local:UCBlackOut>        
+        <local:UCBlackOut></local:UCBlackOut>
+
+        <Image Source="pack://application:,,,/Icons/audio.png" Width="200" Height="200"></Image>
     </Grid>
 </UserControl>

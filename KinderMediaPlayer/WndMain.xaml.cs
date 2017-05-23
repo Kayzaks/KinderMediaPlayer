@@ -55,7 +55,7 @@ namespace KinderMediaPlayer
             //
             // NOTE 1: We ignore the on-screen keyboard for now
             // NOTE 2: Does not work with Multiple Screens
-            ServiceWinInterop.disableSpecialKeys();
+            //ServiceWinInterop.disableSpecialKeys();
 
             // Load the Settings from settings.xml
             ServiceSettings.loadSettings();

@@ -11,23 +11,25 @@
     <UserControl.Resources>
         <local:ConvMediaElementToIcon x:Key="convMediaElementToIcon"/>
     </UserControl.Resources>
-    
-    <Grid HorizontalAlignment="Stretch">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Fill="Gray" Opacity="0.4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
+    <Button x:Name="btnOpen" Click="btnOpen_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnOpen" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Click="btnOpen_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-            <Image Source="{Binding ReferenceElement, Converter={StaticResource convMediaElementToIcon}}"></Image>
-        </Button>
-        <Label Margin="5" Grid.Column="1" Grid.Row="0" Content="{Binding ReferenceElement.Name}"/>
-        <Label Margin="5" Grid.Column="1" Grid.Row="1" Content="{Binding ReferenceElement.Description}"/>
-    </Grid>
+            <Rectangle Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Fill="Gray" Opacity="0.2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
+
+            <Image Grid.Column="0" Grid.Row="0" Source="{Binding ReferenceElement, Converter={StaticResource convMediaElementToIcon}}"></Image>
+
+            <Label FontSize="{Binding FontScaling}" FontWeight="Bold"  Margin="5" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Content="{Binding ReferenceElement.Name}"/>
+            <Label FontSize="{Binding FontScaling}" FontStyle="Italic" Margin="5" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Content="{Binding ReferenceElement.Description}"/>
+        </Grid>        
+    </Button>
 </UserControl>

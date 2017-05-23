@@ -85,7 +85,7 @@ namespace KinderMediaPlayer
             // but reduce the number of rows, depending on the amount of
             // elements actually present
             int numRows = MediaList.Count / sqrtCount;
-
+            
             if (MediaList.Count % sqrtCount > 0)
             {
                 numRows = numRows + 1;
@@ -104,6 +104,10 @@ namespace KinderMediaPlayer
                 pnlElements.ColumnDefinitions.Add(gridColumn);
             }
 
+
+            // Now we adjust the scaling of the Fonts in each element
+            double scaling = Math.Max(100.0 / ((double)numRows), 30.0);
+
             // And now we populate each Row as a Stackpanel and add it in
             for (int i = 0; i < numRows; ++i)
             {
@@ -112,7 +116,7 @@ namespace KinderMediaPlayer
                     int currentIndex = i * sqrtCount + j;
                     if (currentIndex < MediaList.Count)
                     {
-                        UCMediaElement currentElement = new UCMediaElement(MediaList[currentIndex], openMediaElement);
+                        UCMediaElement currentElement = new UCMediaElement(MediaList[currentIndex], openMediaElement, scaling);
                         Grid.SetRow(currentElement, i);
                         Grid.SetColumn(currentElement, j);
                         pnlElements.Children.Add(currentElement);

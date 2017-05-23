@@ -38,6 +38,11 @@ namespace KinderMediaPlayer
                 }
             }
 
+            public double FontScaling
+            {
+                get; set;
+            }
+
             public Action<MediaElement> CallbackOpen
             {
                 get; set;
@@ -57,10 +62,11 @@ namespace KinderMediaPlayer
             this.DataContext = dataContext;
         }
 
-        public UCMediaElement(MediaElement inElement, Action<MediaElement> inCallback) : this()
+        public UCMediaElement(MediaElement inElement, Action<MediaElement> inCallback, double inScaling) : this()
         {            
             dataContext.CallbackOpen = inCallback;
             dataContext.ReferenceElement = inElement;
+            dataContext.FontScaling = inScaling;
         }
 
 
