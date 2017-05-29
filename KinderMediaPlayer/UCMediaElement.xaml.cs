@@ -34,7 +34,7 @@ namespace KinderMediaPlayer
                 }
                 set
                 {
-                    SetField(ref referenceElement, value);
+                    SetField(ref referenceElement, value, "ReferenceElement");
                 }
             }
 

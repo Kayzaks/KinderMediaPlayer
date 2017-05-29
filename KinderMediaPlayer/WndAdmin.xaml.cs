@@ -33,7 +33,7 @@ namespace KinderMediaPlayer
                 }
                 set
                 {
-                    SetField(ref selectedElement, value);
+                    SetField(ref selectedElement, value, "SelectedElement");
                 }
             }
 
@@ -46,7 +46,7 @@ namespace KinderMediaPlayer
                 }
                 set
                 {
-                    SetField(ref mediaElements, value);
+                    SetField(ref mediaElements, value, "MediaElements");
                 }
             }
 
@@ -63,7 +63,7 @@ namespace KinderMediaPlayer
                 }
                 set
                 {
-                    SetField(ref backgroundImage, value);
+                    SetField(ref backgroundImage, value, "BackgroundImage");
                 }
             }
 
